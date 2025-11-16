@@ -41,4 +41,4 @@ Tito:
 - Feature Engineering (Standard Scaler, PCA)
 - Train and test Random Forest Regression
 
-We have uploaded the notebook  "Model_training.ipynb" for data preprocessing and model training.
+We have uploaded the notebook  "model_training.ipynb" for data preprocessing and model training.

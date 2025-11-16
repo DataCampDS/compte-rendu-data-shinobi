@@ -25,17 +25,18 @@ We have discussed about the workflow that we should follow for this project. We 
 Then we do feature engineering (normalization, standard scaler, PCA), and we can work on baseline models for classification like Logistic Regression, Random Forest, KNN, XGBoost,...etc.
 After that, we will work on deep learning models.
 
-# Each member tasks:
-+ Ratanakmuny:
+## Each member tasks:
+
+Ratanakmuny:
 - Data cleaning
 - descriptive statistics
   
-+ Kimmeng:
+Kimmeng:
 - Data preprocessing (log normalization)
 - Feature Engineering (Standard Scaler, PCA)
 - Train and test Logistics Regression
 
-+ Tito:
+Tito:
 - Data preprocessing (normalization)
 - Feature Engineering (Standard Scaler, PCA)
 - Train and test Random Forest Regression

@@ -13,7 +13,7 @@ python3 -m venv env
 
 ## Download single-cell RNA sequencing data
 
-We are going to work on the provided data by download_data.py:
+We worked on the provided data by download_data.py:
 
 ```bash
 python download_data.py
@@ -26,6 +26,16 @@ Then we do feature engineering (normalization, standard scaler, PCA), and we can
 After that, we will work on deep learning models.
 
 # Each member tasks:
-- Ratanakmuny: Data Cleaning, Descriptive Statistics
-- Kimmeng: Data preprocessing and Logistics Regression
-- Tito: Data preprocessing and Random Forest Regression
++ Ratanakmuny:
+- Data cleaning
+- descriptive statistics
+  
++ Kimmeng:
+- Data preprocessing (log normalization)
+- Feature Engineering (Standard Scaler, PCA)
+- Train and test Logistics Regression
+
++ Tito:
+- Data preprocessing (normalization)
+- Feature Engineering (Standard Scaler, PCA)
+- Train and test Random Forest Regression

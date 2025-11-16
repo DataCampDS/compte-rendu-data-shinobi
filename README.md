@@ -32,4 +32,16 @@ Next thing is to do literature review on existing similar tasks. Then we can wor
 
 After that we can work on Deep Learning models.  
 
+## Results
 
+We have tried to use first 2 models, Logistic Regression and Random Forest, and we have evaluated themusing balanced accuracy and confusion matrix. 
+
+### Logistic Regression
+
+- Train balanced accuracy: 1.000
+- Test balanced accuracy: 0.749
+
+### Random Forest Classifier
+
+- Train balanced accuracy: 1.000
+- Test balanced accuracy: 0.655

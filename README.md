@@ -26,7 +26,7 @@ python download_data.py
 ```
 ## Initial workflow
 
-We have devided each members a task in order to progress the process. The First thing we need to do isto do Data Preprocessing and Descriptive Statistics. 
+We have devided each members a task in order to progress the process. The First thing we need to do is to do Data Preprocessing and Descriptive Statistics. 
 
 Next thing is to do literature review on existing similar tasks. Then we can work on baseline models for classification like KNN, XGBoost,...etc.
 

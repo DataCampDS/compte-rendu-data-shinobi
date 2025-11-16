@@ -20,5 +20,3 @@ Tito:
 - Data preprocessing (normalization)
 - Feature Engineering (Standard Scaler, PCA)
 - Train and test Random Forest Regression
-
-We have uploaded the notebook  "model_training.ipynb" for data preprocessing and model training.

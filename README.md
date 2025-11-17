@@ -10,15 +10,15 @@ After that, we moved on to feature engineering (normalization, standard scaler, 
 Following these steps, we will proceed to work on deep learning models if needed.
 
 Ratanakmuny:
-- Exploratory Data Analysis: [exploratory_data_analysis.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/exploratory_data_analysis.ipynb)
+- Exploratory Data Analysis
 - Data preprocessing
   
 Kimmeng:
 - Data preprocessing (log normalization)
 - Feature Engineering (Standard Scaler, PCA)
-- Train and test Logistics Regression: [model_training.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/model_training.ipynb)
+- Train and test Logistics Regression
 
 Tito:
 - Data preprocessing (normalization)
 - Feature Engineering (Standard Scaler, PCA)
-- Train and test Random Forest Regression: [model_training.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/model_training.ipynb)
+- Train and test Random Forest Regression

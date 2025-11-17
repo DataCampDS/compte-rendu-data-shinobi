@@ -3,13 +3,15 @@ Les points hebdomadaires se feront sur ce README.md
 
 # Week 1 & 2 tasks:
 
-We have discussed about the workflow that we should follow for this project. We have devided each members a task in order to progress the process. The First thing we need to do is to do Data Preprocessing and Descriptive Statistics. 
-Then we do feature engineering (normalization, standard scaler, PCA), and we can work on baseline models for classification like Logistic Regression, Random Forest, KNN, XGBoost,...etc.
-After that, we will work on deep learning models.
+We have discussed about the workflow of this project by divided for each members tasks to ensure steady progress. We started with Exploratory Data Analysis (Descriptive Statistics,...), and Data Preprocessing. This step is important because it helps us clearly understand the nature of the data and gives us an initial direction for improving performance along the way.
+
+After that, we moved on to feature engineering (normalization, standard scaler, PCA), and now we are experimenting with baseline classification models such as Logistic Regression, Random Forest, KNN, XGBoost, etc. Here, we are trying every model's setup as many as possible that could give us a good performance with minimal time run.  
+
+Following these steps, we will proceed to work on deep learning models if needed.
 
 Ratanakmuny:
-- Data cleaning
-- descriptive statistics
+- Exploratory Data Analysis: [exploratory_data_analysis.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/exploratory_data_analysis.ipynb)
+- Data preprocessing
   
 Kimmeng:
 - Data preprocessing (log normalization)

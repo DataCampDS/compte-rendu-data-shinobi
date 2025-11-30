@@ -22,3 +22,11 @@ Tito:
 - Data preprocessing (normalization)
 - Feature Engineering (Standard Scaler, PCA)
 - Train and test Random Forest Regression
+
+# Week 3 & 4 tasks:
+
+Ratanakmuny:
+
+Kimmeng:
+
+Tito:

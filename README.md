@@ -25,7 +25,18 @@ Tito:
 
 # Week 3 & 4 tasks:
 
+These two weeks due to many tasks of project from other courses, our progress is a little bit slow. In this stage, we are still working on the modeling by exploring all the possible models that we know and from the assumption that from did EDA. From the modeling that we have done, the accuracy of the baseline model seems to be around 0.8 on the test dataset. 
+
+So, we are working on training new models, apply feature engineerings to see whether the accuracy can be achived higher than the result we have or not.
+
+Our purpose is to find serveral best performance models then try to apply the feature engineering and hyperparamter in the next stage. 
+
+The tasks were divided:
+
 Ratanakmuny:
+- Data Preprocessing (Stull working on it because the result didn't improve like what we expected it to be)
+- Worked on handle the imbalanced class with SMOTE
+- Trained on Logistic, Random Forest, SVM and Gradient Boosting
 
 Kimmeng:
 

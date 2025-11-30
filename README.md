@@ -38,6 +38,7 @@ Ratanakmuny:
 - Worked on handle the imbalanced class with SMOTE
 - Trained on Logistic, Random Forest, SVM and Gradient Boosting
 
-Kimmeng:
-
-Tito:
+Kimmeng & Tito:
+- Research on High Variance Gene Selection
+- Perform High Variance Gene selection
+- Encounter overfitting problem when doing this

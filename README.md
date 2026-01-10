@@ -34,11 +34,35 @@ Our purpose is to find serveral best performance models then try to apply the fe
 The tasks were divided:
 
 Ratanakmuny:
-- Data Preprocessing (Stull working on it because the result didn't improve like what we expected it to be)
-- Worked on handle the imbalanced class with SMOTE
+- Data Preprocessing (Still working on it because the result didn't improve like what we expected it to be)
+- Worked on handle the imbalanced class with SMOTE (Not Good Idea!)
 - Trained on Logistic, Random Forest, SVM and Gradient Boosting
 
 Kimmeng & Tito:
 - Research on High Variance Gene Selection
 - Perform High Variance Gene selection
 - Encounter overfitting problem when doing this
+
+Result (end of Week 4):
+After Week 4, we observed that our baseline Logistic Regression achieved around 0.8 accuracy on the test dataset. However, when we applied High Variance Gene Selection, the models started to overfit, and the performance on our local validation/training setup dropped below 0.8. This suggested that the added complexity was not helping and that something in the pipeline (preprocessing, splitting, or feature selection strategy) might be causing instability.
+
+# Week 5 & 6 tasks:
+
+After obtaining worse results than the baseline in Week 4, our main objective became: **identify why the more advanced models performed worse than the baseline**.
+
+The tasks were divided:
+
+Ratanakmuny:
+- Investigate and validate the data preprocessing pipeline (since the improvements did not match expectations)
+- Check whether preprocessing choices could explain the performance drop
+
+Tito:
+- Study reasonable ways to improve the current models without overcomplicating the pipeline
+- Focus on approaches that improve performance while keeping runtime acceptable
+
+Kimmeng:
+- Work on an MLP approach and test whether a simple neural network can outperform the baseline
+
+# Week 7 until the end of the challenge
+
+From Week 7 onward, we shifted into an optimization phase. All team members are now focused on improving performance by iterating on the best candidate models, applying feature engineering and hyperparameter tuning, and selecting a strong final strategy with the goal of reaching the top ranking.

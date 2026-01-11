@@ -235,6 +235,8 @@ From the training and testing scores before the submission, we notice that Gradi
 
 # Improvement
 
+You can view our improvement modeling notebook here: [model_training_improvement.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/model_training_improvement.ipynb).
+
 After experimenting with our initial preprocessing pipelines (P0 to P5) and multiple models, we observed a clear pattern:
 
 - **Logistic Regression performed best with P4** (HVG + scaling), which suggests the linear model is sensitive to feature scaling.
@@ -284,5 +286,14 @@ Despite trying our best to test every models and finetuning for the best paramet
 
 However, our cost it seems to be less than other team. As data science students, our perspective is trying to get the best performance out of the model with the affordable cost. By that we mean, the performance and the runtime has to balance with each other.
 
-If we have more times, I think we can use more technique to make it better like modifying the strategy of modeling by analyze the outcome of the confusion matrix.
+If we have more times, I think we can use more techniques:
+- **Specialist models for hard pairs:** Most remaining errors come from biologically similar classes (especially **NK vs T_cells_CD8+**, and sometimes **T_cells_CD4+ vs T_cells_CD8+**). A practical extension is to add a second-stage binary classifier for these pairs and apply it only on uncertain predictions.
+
+- **Supervised feature selection after TF-IDF:** After dispersion-based gene selection, we can apply a lightweight supervised filter (for example chi-square) on TF-IDF features to keep the most discriminative genes for the labels.
+
+- **Calibration and confidence analysis:** Improve decision rules by calibrating probabilities and using confidence-based thresholds (entropy or max probability) to reduce misclassification on ambiguous cells.
+
+- **Ensembling with minimal overhead:** Combine the final Logistic Regression model with one additional fast model (for example Multinomial Naive Bayes on TF-IDF) by averaging predicted probabilities, aiming to improve recall for the weakest class without increasing runtime too much.
+
+- **More robust evaluation:** Use cross-validation and systematic error analysis (per-class recall stability) to confirm that improvements generalize beyond a single split.
 

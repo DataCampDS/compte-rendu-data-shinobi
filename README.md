@@ -235,7 +235,71 @@ From the training and testing scores before the submission, we notice that Gradi
 
 # Improvement
 
+After experimenting with our initial preprocessing pipelines (P0 to P5) and multiple models, we observed a clear pattern:
 
+- **Logistic Regression performed best with P4** (HVG + scaling), which suggests the linear model is sensitive to feature scaling.
+- **LightGBM performed best with P3** (HVG without scaling), which is expected since tree-based models do not benefit from standardization.
+- However, even when we changed models or added feature engineering (PCA, additional transforms), the performance tended to plateau around the same range. This indicated that the limitation was not only the classifier, but also the **representation of the gene expression matrix**.
+
+Because of that, we took a step back and explored a different interpretation of the data.
+
+## New idea: Treat gene expression as a "bag of genes" problem
+
+We reframed the single-cell matrix in a way similar to text classification:
+
+- Each **cell** is treated as a **document**
+- Each **gene** is treated as a **word**
+- Each **count** is treated as a **word frequency**
+
+This viewpoint motivated two changes:
+1. Use a fast **unsupervised gene selection** method to keep only informative genes (HVG-like selection).
+2. Use **TF-IDF weighting** to downweight genes that appear in many cells and upweight genes that are more specific to certain cell types.
+
+## Final preprocessing pipeline used for the best model
+
+The final pipeline is:
+
+1. **Gene filtering by detection frequency**
+   - Compute, for each gene, the number of cells where the gene is detected (`count > 0`).
+   - Keep genes that are neither too rare nor too common:
+     - `min_df_frac = 0.01`
+     - `max_df_frac = 0.95`
+
+2. **HVG selection using dispersion**
+   - Compute a dispersion score on a stabilized matrix:
+     - Apply library-size normalization per cell: `normalize_sum`
+     - Apply variance-stabilizing transform: `log1p`
+   - For each gene:
+     - `dispersion = variance / (mean + eps)`
+   - Keep the top genes by dispersion:
+     - `top_k = 2000`
+
+3. **TF-IDF transformation**
+   - Restrict the original count matrix to the selected genes.
+   - Apply TF-IDF:
+     - `sublinear_tf=True`
+     - `smooth_idf=True`
+     - `norm="l2"`
+
+4. **Classification**
+   - Train a multiclass **Logistic Regression with L2 regularization** on TF-IDF features:
+     - solver: `saga`
+     - penalty: `l2`
+     - `C = 1.0`
+     - `class_weight="balanced"`
+
+This approach improves class separation because:
+
+- Dispersion-based selection keeps genes that vary meaningfully across cells, reducing noise and runtime.
+- TF-IDF reduces the impact of genes expressed in many cell types (common genes) and highlights genes that are more specific to one class.
+- Logistic Regression is efficient and effective on sparse high-dimensional TF-IDF features.
+
+This combination led to a significant improvement in balanced accuracy and faster runtime compared to our earlier pipelines.
+
+## Result
+
+- Balanced accuracy: 0.88
+- Training and validation time: 3.645396s and 0.155921s
 
 # Ranking
 

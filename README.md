@@ -255,39 +255,6 @@ This viewpoint motivated two changes:
 1. Use a fast **unsupervised gene selection** method to keep only informative genes (HVG-like selection).
 2. Use **TF-IDF weighting** to downweight genes that appear in many cells and upweight genes that are more specific to certain cell types.
 
-## Final preprocessing pipeline used for the best model
-
-The final pipeline is:
-
-1. **Gene filtering by detection frequency**
-   - Compute, for each gene, the number of cells where the gene is detected (`count > 0`).
-   - Keep genes that are neither too rare nor too common:
-     - `min_df_frac = 0.01`
-     - `max_df_frac = 0.95`
-
-2. **HVG selection using dispersion**
-   - Compute a dispersion score on a stabilized matrix:
-     - Apply library-size normalization per cell: `normalize_sum`
-     - Apply variance-stabilizing transform: `log1p`
-   - For each gene:
-     - `dispersion = variance / (mean + eps)`
-   - Keep the top genes by dispersion:
-     - `top_k = 2000`
-
-3. **TF-IDF transformation**
-   - Restrict the original count matrix to the selected genes.
-   - Apply TF-IDF:
-     - `sublinear_tf=True`
-     - `smooth_idf=True`
-     - `norm="l2"`
-
-4. **Classification**
-   - Train a multiclass **Logistic Regression with L2 regularization** on TF-IDF features:
-     - solver: `saga`
-     - penalty: `l2`
-     - `C = 1.0`
-     - `class_weight="balanced"`
-
 This approach improves class separation because:
 
 - Dispersion-based selection keeps genes that vary meaningfully across cells, reducing noise and runtime.

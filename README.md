@@ -234,5 +234,14 @@ From the training and testing scores before the submission, we notice that Gradi
 
 # Ranking
 
+Based on the current public leaderboard:
+
+| Rank | Team        | Best balanced accuracy (bal_acc) |
+|------|-------------|----------------------------------|
+| 1    | Team Avenger| 0.89                             |
+| 2    | Team A      | 0.88                             |
+| 3    | Predicta    | 0.86                             |
+| 4    | Team Shinobi (our team) | 0.86                   |
+
 
 

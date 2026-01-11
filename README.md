@@ -68,7 +68,7 @@ Kimmeng:
 From Week 7 onward, we shifted into an optimization phase. All team members are now focused on improving performance by iterating on the best candidate models, applying feature engineering and hyperparameter tuning, and selecting a strong final strategy with the goal of reaching the top ranking.
 
 
-# -------------------------------------------
+---
 
 # Introduction
 
@@ -80,8 +80,8 @@ The goal is to train models that are best for classification, specifically cell-
 
 Before training our models, we started with data preprocessing below, follow by the problem and the solutions: 
 
-- Large variability in total gene expression across cells ->normalization is necessary.
-- Gene expression is highly right-skewed with outliers ->log transformation is applied.
+- Large variability in total gene expression across cells -> normalization is necessary.
+- Gene expression is highly right-skewed with outliers -> log transformation is applied.
 - Most genes show low variance -> select highly variable genes to reduce noise.
 - Keeping only variable genes preserves informative biological signals.
 - High dimensionality and correlated genes -> feature standardization is required.
@@ -92,24 +92,18 @@ Before training our models, we started with data preprocessing below, follow by 
 Preprocessing pipelines are evaluated progressively, starting from raw data and gradually incorporating normalization, variance stabilization, feature selection, scaling, and dimensionality reduction to assess their impact on model performance.
 
 * Pipeline 1: Raw baseline
-
-- No preprocessing.
-- Used as a reference to measure the benefit of all transformations.
+    - No preprocessing.
+    - Used as a reference to measure the benefit of all transformations.
 * Pipeline 2: Normalization only
-
-- Cells are normalized by their total expression to correct for sequencing depth differences.
+    - Cells are normalized by their total expression to correct for sequencing depth differences.
 * Pipeline 3: Normalization + log transform
-
-- Log transformation is added to reduce skewness and stabilize variance after normalization.
+    - Log transformation is added to reduce skewness and stabilize variance after normalization.
 * Pipeline 4: Normalization + log transform + HVG selection
-
-- Feature space is reduced by keeping only highly variable genes, removing uninformative genes.
+    - Feature space is reduced by keeping only highly variable genes, removing uninformative genes.
 * Pipeline 5: Normalization + log transform + HVG selection + scaling
-
-- Features are standardized to ensure comparable scales, which is important for linear models and PCA.
+    - Features are standardized to ensure comparable scales, which is important for linear models and PCA.
 * Pipeline 6: Normalization + log transform + HVG selection + scaling + PCA
-
-- Dimensionality is further reduced using PCA to remove redundancy and retain the main sources of variation.
+    - Dimensionality is further reduced using PCA to remove redundancy and retain the main sources of variation.
 
 # Models Evaluation
 
@@ -117,21 +111,24 @@ We have worked with a lot of models like Logistic Regression, Linear SVM, Gaussi
 
 The top 3 highest performances among those models are:
 1. Ensemble model of Stacking:
-- Balanced accuracy: 0.86
-- Training and validation time: 137.802195s and 3.352885s
-- Base models: Bagging, HistGradient and LightGBM
-- Meta model: Logistic regression
-- Pipeline: 
+    - Balanced accuracy: 0.86
+    - Training and validation time: 137.802195s and 3.352885s
+    - Base models: Bagging, HistGradient and LightGBM
+    - Meta model: Logistic regression
+    - Pipeline: 
 
 2. LightGBM:
-- Balanced accuracy: 0.86
-- Training and validation time: 43.036889s and 1.301543s
-- Pipeline 4: Normalization + log transform + HVG selection
+    - Balanced accuracy: 0.86
+    - Training and validation time: 43.036889s and 1.301543s
+    - Pipeline 4: Normalization + log transform + HVG selection
 
 3. Gradient Boosting:
-- Balanced accuracy: 0.85
-- Training and validation time: 590.340776s and	1.214318s
-- Pipeline 4: Normalization + log transform + HVG selection
+    - Balanced accuracy: 0.85
+    - Training and validation time: 590.340776s and	1.214318s
+    - Pipeline 4: Normalization + log transform + HVG selection
 
 From the training and testing scores before the submission, we notice that Gradient Boosting and LightGBM perform worse after scaling and PCA because tree-based models do not benefit from these transformations and can lose important information when they are applied.
+
+# Ranking
+
 

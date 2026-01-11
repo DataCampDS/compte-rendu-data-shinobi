@@ -243,5 +243,12 @@ Based on the current public leaderboard:
 | 3    | Predicta    | 0.86                             |
 | 4    | Team Shinobi (our team) | 0.86                   |
 
+# Conclusion
 
+Despite trying our best to test every models and finetuning for the best parameter, we are still at the back compare to other team. We should have focused more on the technique preprocessing the data and analyze on the genes that frequency active. Moreover, we may play around the strategy of the modeling by anaylzing the result of the confusion matrix which cells that models confused.
+
+If we have more times, I think we can use more technique to make it better such as:
+- HVG dispersion feature selection
+- TF-IDF by analyze the genes that frenquently active
+- Modify strategy of modeling by analyze the model
 

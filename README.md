@@ -192,18 +192,18 @@ Before training our models, we started with data preprocessing below, follow by 
 
 Preprocessing pipelines are evaluated progressively, starting from raw data and gradually incorporating normalization, variance stabilization, feature selection, scaling, and dimensionality reduction to assess their impact on model performance.
 
-* Pipeline 1: Raw baseline
+* Pipeline 0: Raw baseline
     - No preprocessing.
     - Used as a reference to measure the benefit of all transformations.
-* Pipeline 2: Normalization only
+* Pipeline 1: Normalization only
     - Cells are normalized by their total expression to correct for sequencing depth differences.
-* Pipeline 3: Normalization + log transform
+* Pipeline 2: Normalization + log transform
     - Log transformation is added to reduce skewness and stabilize variance after normalization.
-* Pipeline 4: Normalization + log transform + HVG selection
+* Pipeline 3: Normalization + log transform + HVG selection
     - Feature space is reduced by keeping only highly variable genes, removing uninformative genes.
-* Pipeline 5: Normalization + log transform + HVG selection + scaling
+* Pipeline 4: Normalization + log transform + HVG selection + scaling
     - Features are standardized to ensure comparable scales, which is important for linear models and PCA.
-* Pipeline 6: Normalization + log transform + HVG selection + scaling + PCA
+* Pipeline 5: Normalization + log transform + HVG selection + scaling + PCA
     - Dimensionality is further reduced using PCA to remove redundancy and retain the main sources of variation.
 
 # Models Evaluation
@@ -213,17 +213,18 @@ You can view our modeling notebook here: [model_training.ipynb](https://github.c
 We have worked with a lot of models like Logistic Regression, Linear SVM, Gaussian Navies Bayes, Random Forest, KNN, Decision Tree, Extra Tree, GradientBoosting, HistGradient, XGBoosting, AdaBoost, LightGBM, and ensemble methods like Bagging, Voting and Stacking.
 
 The top 3 highest performances among those models are:
-1. Ensemble model of Stacking:
+
+1. LightGBM:
+    - Balanced accuracy: 0.86
+    - Training and validation time: 43.036889s and 1.301543s
+    - Pipeline 4: Normalization + log transform + HVG selection
+
+2. Ensemble model of Stacking:
     - Balanced accuracy: 0.86
     - Training and validation time: 137.802195s and 3.352885s
     - Base models: Bagging, HistGradient and LightGBM
     - Meta model: Logistic regression
     - Pipeline 5: Normalization + log transform + HVG selection + Scaling
-
-2. LightGBM:
-    - Balanced accuracy: 0.86
-    - Training and validation time: 43.036889s and 1.301543s
-    - Pipeline 4: Normalization + log transform + HVG selection
 
 3. Gradient Boosting:
     - Balanced accuracy: 0.85
@@ -232,23 +233,25 @@ The top 3 highest performances among those models are:
 
 From the training and testing scores before the submission, we notice that Gradient Boosting and LightGBM perform worse after scaling and PCA because tree-based models do not benefit from these transformations and can lose important information when they are applied.
 
+# Improvement
+
+
+
 # Ranking
 
 Based on the current public leaderboard:
 
-| Rank | Team        | Best balanced accuracy (bal_acc) |
-|------|-------------|----------------------------------|
-| 1    | Team Avenger| 0.89                             |
-| 2    | Team A      | 0.88                             |
-| 3    | Predicta    | 0.86                             |
-| 4    | Team Shinobi (our team) | 0.86                   |
+| Rank | Team        | Best balanced accuracy (bal_acc) | Train time (s)  | Validation time (s) |
+|------|-------------|----------------------------------|-----------------|---------------------|
+| 1    | Team Avenger| 0.89                             | 41.145948       | 8.252714            |
+| 2    | Team A      | 0.88                             | 13.048182       | 0.953971            |
+| 3    | Team Shinobi (our team) | 0.88                   | 3.645396        | 0.155921            |
 
 # Conclusion
 
-Despite trying our best to test every models and finetuning for the best parameter, we are still at the back compare to other team. We should have focused more on the technique preprocessing the data and analyze on the genes that frequency active. Moreover, we may play around the strategy of the modeling by anaylzing the result of the confusion matrix which cells that models confused.
+Despite trying our best to test every models and finetuning for the best parameter, we are still at the back compare to other team. We should have focused around the strategy of the modeling by anaylzing the result of the confusion matrix which cells that models confused.
 
-If we have more times, I think we can use more technique to make it better such as:
-- HVG dispersion feature selection
-- TF-IDF by analyze the genes that frenquently active
-- Modify strategy of modeling by analyze the model
+However, our cost it seems to be less than other team. As data science students, our perspective is trying to get the best performance out of the model with the affordable cost. By that we mean, the performance and the runtime has to balance with each other.
+
+If we have more times, I think we can use more technique to make it better like modifying the strategy of modeling by analyze the outcome of the confusion matrix.
 

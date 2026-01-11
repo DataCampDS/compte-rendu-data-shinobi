@@ -61,7 +61,7 @@ Tito:
 - Focus on approaches that improve performance while keeping runtime acceptable
 
 Kimmeng:
-- Work on an MLP approach and test whether a simple neural network can outperform the baseline
+- Work on a stacking classification to combine several good baseline models.
 
 # Week 7 until the end of the challenge
 

@@ -76,6 +76,93 @@ In this project, we are working on classification of cell-types of the scMARK da
 
 The goal is to train models that are best for classification, specifically cell-types classification with high-dimensional and imbalance dataset.
 
+# Exploration Data Analysis
+
+You can view our EDA notebook here: [exploratory_data_analysis.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/exploratory_data_analysis.ipynb).
+
+### Dataset overview
+
+* **Task:** supervised classification of 4 cell types from scRNA-seq gene count data. 
+* **Shapes and formats:**
+
+  * `X_train`: CSR sparse matrix, **(1000, 13551)** genes 
+  * `X_test`: CSR sparse matrix, **(500, 13551)** genes 
+  * `y_train`: categorical labels with 4 classes, **no missing labels** 
+
+### Class distribution (imbalance)
+
+* Train label counts and proportions: 
+
+  * **T_cells_CD8+**: 342 (0.342)
+  * **T_cells_CD4+**: 336 (0.336)
+  * **Cancer_cells**: 237 (0.237)
+  * **NK_cells**: 85 (0.085)
+* Takeaway: the dataset is **imbalanced**, mainly due to the smaller NK_cells class. 
+
+### Cell-level QC and sparsity (why preprocessing is needed)
+
+Computed per cell: total counts, number of detected genes, and percent zeros. Summary stats: 
+
+* **Total counts per cell**
+
+  * mean: ~3334, median: ~1995, max: 37679
+* **Detected genes per cell**
+
+  * mean: ~1091, median: ~840, max: 5628
+* **Sparsity per cell (% zeros)**
+
+  * mean: ~91.95%, median: ~93.80%
+
+Sparsity patterns: 
+
+* Most cells have **~90% to 98% zeros**, meaning each cell expresses only a small fraction of genes.
+* This is expected for scRNA-seq, but it makes modeling harder and motivates **normalization** and **dimension reduction / feature selection**.
+
+### Gene-level sparsity and variance (why HVG helps)
+
+* For genes, the majority have **~95% to 100% zeros**, meaning many genes are rarely expressed and likely uninformative for classification. 
+* Gene variance distribution is **highly skewed**: a small subset of genes has very high variance, while most genes are low-variance. 
+* Ranked variances (log-scale) show a sharp drop, and cumulative variance indicates **diminishing returns** when adding more genes, supporting a **Highly Variable Gene (HVG)** selection approach. 
+
+### Total expression distribution (normalization signal)
+
+* Total counts per cell are strongly **right-skewed**:
+
+  * Most cells are around **500 to 3000** counts
+  * A minority forms a long tail up to **~35,000** counts 
+* Takeaway: sequencing depth varies a lot across cells, so **normalization is necessary** before PCA and classification. 
+
+### Low-dimensional visualization (separability check)
+
+* **PCA (2 components)** on standardized data shows **partial separation**: 
+
+  * Cancer_cells form a broader cluster with high spread along PC1
+  * NK_cells appear more compact and shifted relative to Cancer_cells
+  * T_cells_CD4+ and T_cells_CD8+ overlap more (biologically similar), making them harder to separate
+* **UMAP** embedding was also computed to visualize structure (used as an additional qualitative check). 
+
+### Correlation structure between genes (redundancy evidence)
+
+* Correlation heatmap on the **top 200 most variable genes** shows clear **block structures** (co-expression modules) and anti-correlated regions. 
+* Takeaway: many genes are redundant, reinforcing the value of **PCA** and/or careful feature selection. 
+
+### EDA conclusions that guided the pipeline
+
+From the observed properties of the data: 
+
+* Data is **ultra sparse** and **high-dimensional** (1000 × 13551).
+* Many genes are uninformative (mostly zeros, low variance).
+* Total counts vary strongly across cells, so **normalization** is needed.
+* PCA and UMAP show meaningful structure (signal exists), but CD4/CD8 separation is intrinsically harder.
+* Strong correlation blocks suggest redundancy, motivating **HVG selection** and **dimensionality reduction**.
+
+### Suggested next steps from EDA
+
+* Normalize counts across cells (sequencing depth correction). 
+* Apply log transform to stabilize skewness. 
+* Select HVGs (for example top 500 to 2000 genes) and/or apply PCA before classification. 
+* Handle imbalance using **class weights** first; oversampling such as SMOTE was considered but may generate unrealistic samples for gene expression. 
+
 # Data preprocessing
 
 Before training our models, we started with data preprocessing below, follow by the problem and the solutions: 

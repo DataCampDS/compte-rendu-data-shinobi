@@ -72,9 +72,23 @@ From Week 7 onward, we shifted into an optimization phase. All team members are 
 
 # Introduction
 
-In this project, we are working on classification of cell-types of the scMARK dataset. There exist 1000 observations on training dataset and 500 observation on testing dataset, but the main problem is that this is a high-dimensional dataset where the number of features is higher than the number of observations. Additionally, the number of each cell-type is also imbalanced with T_cells_CD8+,T_cells_CD4+, Cancer_cells and NK_cells, 342, 336, 237 and 85 respectively.
+This project focuses on **cell-type classification** using the scMARK single-cell RNA-seq dataset. The goal is to predict one of four cell types from gene expression counts:
 
-The goal is to train models that are best for classification, specifically cell-types classification with high-dimensional and imbalance dataset.
+- Cancer_cells  
+- NK_cells  
+- T_cells_CD4+  
+- T_cells_CD8+  
+
+The training set contains **1000 cells** and the test set contains **500 cells**, with **13551 genes** measured per cell. This creates a challenging setting where the number of features is much larger than the number of observations (high-dimensional data).
+
+In addition, the classes are **imbalanced** in the training set:
+- T_cells_CD8+: 342  
+- T_cells_CD4+: 336  
+- Cancer_cells: 237  
+- NK_cells: 85  
+
+Because scRNA-seq data is sparse, noisy, and high-dimensional, the main objective is to build a robust machine learning pipeline that improves classification performance while keeping runtime acceptable. Our work explores preprocessing (normalization, log transform, highly variable gene selection, scaling, PCA) and a wide range of classical machine learning models and ensemble strategies, evaluated using **balanced accuracy**.
+
 
 # Exploration Data Analysis
 
@@ -194,6 +208,8 @@ Preprocessing pipelines are evaluated progressively, starting from raw data and 
 
 # Models Evaluation
 
+You can view our modeling notebook here: [model_training.ipynb](https://github.com/DataCampDS/scmark-classification-data-shinobi/blob/main/model_training_before_submission.ipynb).
+
 We have worked with a lot of models like Logistic Regression, Linear SVM, Gaussian Navies Bayes, Random Forest, KNN, Decision Tree, Extra Tree, GradientBoosting, HistGradient, XGBoosting, AdaBoost, LightGBM, and ensemble methods like Bagging, Voting and Stacking.
 
 The top 3 highest performances among those models are:
@@ -202,7 +218,7 @@ The top 3 highest performances among those models are:
     - Training and validation time: 137.802195s and 3.352885s
     - Base models: Bagging, HistGradient and LightGBM
     - Meta model: Logistic regression
-    - Pipeline: Normalization + log transform + HVG selection + Scaling
+    - Pipeline 5: Normalization + log transform + HVG selection + Scaling
 
 2. LightGBM:
     - Balanced accuracy: 0.86

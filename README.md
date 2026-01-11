@@ -115,7 +115,7 @@ The top 3 highest performances among those models are:
     - Training and validation time: 137.802195s and 3.352885s
     - Base models: Bagging, HistGradient and LightGBM
     - Meta model: Logistic regression
-    - Pipeline: 
+    - Pipeline: Normalization + log transform + HVG selection + Scaling
 
 2. LightGBM:
     - Balanced accuracy: 0.86
@@ -130,5 +130,6 @@ The top 3 highest performances among those models are:
 From the training and testing scores before the submission, we notice that Gradient Boosting and LightGBM perform worse after scaling and PCA because tree-based models do not benefit from these transformations and can lose important information when they are applied.
 
 # Ranking
+
 
 

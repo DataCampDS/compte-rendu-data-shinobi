@@ -217,19 +217,19 @@ The top 3 highest performances among those models are:
 1. LightGBM:
     - Balanced accuracy: 0.86
     - Training and validation time: 43.036889s and 1.301543s
-    - Pipeline 4: Normalization + log transform + HVG selection
+    - Pipeline 3: Normalization + log transform + HVG selection
 
 2. Ensemble model of Stacking:
     - Balanced accuracy: 0.86
     - Training and validation time: 137.802195s and 3.352885s
     - Base models: Bagging, HistGradient and LightGBM
     - Meta model: Logistic regression
-    - Pipeline 5: Normalization + log transform + HVG selection + Scaling
+    - Pipeline 3: Normalization + log transform + HVG selection
 
 3. Gradient Boosting:
     - Balanced accuracy: 0.85
     - Training and validation time: 590.340776s and	1.214318s
-    - Pipeline 4: Normalization + log transform + HVG selection
+    - Pipeline 3: Normalization + log transform + HVG selection
 
 From the training and testing scores before the submission, we notice that Gradient Boosting and LightGBM perform worse after scaling and PCA because tree-based models do not benefit from these transformations and can lose important information when they are applied.
 

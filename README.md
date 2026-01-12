@@ -1,3 +1,10 @@
+Notes finales : 
+
+- Tito : 15.5/20
+- Ratanakmuny : 16.5/20
+- Kimmeng : 15/20
+
+
 # suivi-datacamp
 Les points hebdomadaires se feront sur ce README.md
 
